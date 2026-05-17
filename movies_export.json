@@ -1,6 +1,0 @@
-[
-  {"id":"MOV2","title":"The Godfather","yearRelease":1972,"duration":175,"ageRestriction":"R","director":"Francis Ford Coppola","country":"USA","budget":6000000.00},
-  {"id":"MOV4","title":"Spirited Away","yearRelease":2001,"duration":125,"ageRestriction":"PG","director":"Hayao Miyazaki","country":"Japan","budget":19000000.00},
-  {"id":"MOV1","title":"Inception","yearRelease":2010,"duration":148,"ageRestriction":"PG-13","director":"Christopher Nolan","country":"USA","budget":160000000.00},
-  {"id":"MOV3","title":"Parasite","yearRelease":2019,"duration":132,"ageRestriction":"R","director":"Bong Joon-ho","country":"South Korea","budget":11400000.00}
-]

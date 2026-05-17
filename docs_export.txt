@@ -1,4 +1,0 @@
-Documentary{id='DOC3', title='13th', year=2016, duration=100min, age='PG-13', theme='Social Justice', narrator='Ava DuVernay', awards=0}
-Documentary{id='DOC4', title='Apollo 11', year=2019, duration=93min, age='G', theme='Space', narrator='Todd Douglas Miller', awards=0}
-Documentary{id='DOC1', title='Blue Planet II', year=2017, duration=50min, age='G', theme='Nature', narrator='David Attenborough', awards=2}
-Documentary{id='DOC2', title='The Last Dance', year=2020, duration=50min, age='PG', theme='Sports', narrator='Mike Tollin', awards=0}
