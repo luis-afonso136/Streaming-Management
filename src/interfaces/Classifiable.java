@@ -1,7 +1,5 @@
 package interfaces;
 
-import java.util.List;
-
 /**
  * Interface for entities that can receive and manage ratings/classifications.
  */
