@@ -173,5 +173,8 @@ Todas as entidades implementam `Serializable`. Os serviços disponibilizam méto
 
 ## 👥 Grupo
 
+Luís Afonso, 29731
+Pedro Ferreira, 29739
+
 Licenciatura em Engenharia de Computação Gráfica e Multimédia  
 UC Algoritmia e Programação · 2025/2026
