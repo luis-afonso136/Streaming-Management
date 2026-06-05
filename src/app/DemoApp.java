@@ -164,15 +164,7 @@ public class DemoApp {
             print("   ❌ Error: " + e.getMessage());
         }
 
-        print("\n7. Export Documentaries to TXT...");
-        try {
-            documentaryService.exportToTxt("docs_export.txt");
-            print("   ✅ Exported to docs_export.txt");
-        } catch (Exception e) {
-            print("   ❌ Error: " + e.getMessage());
-        }
-
-        print("\n8. All content sorted by title:");
+        print("\n7. All content sorted by title:");
         List<Movie> movies = movieService.getAll();
         movieService.bubbleSortByTitle(movies);
         List<Series> series = seriesService.getAll();
@@ -187,11 +179,11 @@ public class DemoApp {
         documentaryService.getAllOrderedByTitle().forEach(d -> System.out.print(d.getTitle() + "; "));
         System.out.println();
 
-        print("\n9. Movies between 2000 and 2020:");
+        print("\n8. Movies between 2000 and 2020:");
         movieService.getByYearInterval(2000, 2020)
                 .forEach(mv -> print("   " + mv.getYearRelease() + "  " + mv.getTitle()));
 
-        print("\n10. Total counts:");
+        print("\n9. Total counts:");
         print("    Movies: " + movieService.count() + " | Series: " + seriesService.count() + " | Documentaries: "
                 + documentaryService.count());
     }
