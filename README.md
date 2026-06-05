@@ -1,30 +1,47 @@
 # 🎬 Streaming Content Management Platform
 
-> Projeto prático de **Algoritmia e Programação** — Licenciatura em Engenharia de Computação Gráfica e Multimédia · 2025/2026
+> Practical assignment for **Algorithms and Programming** — Bachelor's in Computer Graphics and Multimedia Engineering · 2025/2026
 
 ---
 
-## 📌 Descrição
+## 💡 The Idea
 
-Plataforma de gestão de conteúdos audiovisuais inspirada em serviços como Netflix, Prime Video e HBO Max. Permite gerir **Filmes**, **Séries** e **Documentários**, aplicando os principais conceitos de Programação Orientada a Objetos, estruturas de dados e algoritmos de ordenação e pesquisa.
+Imagine you're running a streaming service like Netflix. Every day, hundreds of new movies, series and documentaries need to be added, searched, filtered and organised. Doing this manually would be slow and error-prone.
+
+**StreamFlow** is a backend content management platform built exactly for this purpose. It gives streaming operators a powerful system to:
+
+- 📥 **Add** new audiovisual content with full data validation
+- 🔍 **Search** by ID, title, year, age restriction, or production status
+- 📊 **Sort and filter** content using efficient custom algorithms
+- 🏆 **Track** ratings, subtitles and awards per content type
+- 💾 **Export** catalogues to `.json` or `.txt` for external use
+- 🔄 **Persist** data across sessions so nothing is lost on shutdown
+
+The system is designed to be fast and reliable — using a **Binary Search Tree** for movie retrieval by year, a **custom LIFO Stack** to track the most recently added series, and a **TreeSet** to keep documentaries always sorted and duplicate-free.
 
 ---
 
-## 🗂️ Estrutura do Projeto
+## 📌 Description
+
+An audiovisual content management platform inspired by services such as Netflix, Prime Video and HBO Max. It allows managing **Movies**, **Series** and **Documentaries**, applying the core principles of Object-Oriented Programming, data structures, and sorting and searching algorithms.
+
+---
+
+## 🗂️ Project Structure
 
 ```
 StreamingPlatform/
 ├── src/
 │   ├── interfaces/
-│   │   ├── Classifiable.java       # Ratings/classificações
-│   │   ├── Captionable.java        # Legendas/captions
-│   │   └── Awardable.java          # Prémios/awards
+│   │   ├── Classifiable.java       # Ratings/classifications
+│   │   ├── Captionable.java        # Subtitles/captions
+│   │   └── Awardable.java          # Awards
 │   ├── utilities/
-│   │   ├── StackNode.java          # Nó genérico da Stack
-│   │   └── Stack.java              # Stack LIFO genérica com linked nodes
+│   │   ├── StackNode.java          # Generic Stack node
+│   │   └── Stack.java              # Generic LIFO Stack with linked nodes
 │   ├── tree/
-│   │   ├── Node.java               # Nó genérico da BST
-│   │   └── BinarySearchTree.java   # BST de filmes (ano + título)
+│   │   ├── Node.java               # Generic BST node
+│   │   └── BinarySearchTree.java   # BST for Movies (year + title)
 │   ├── model/
 │   │   ├── Movie.java
 │   │   ├── Series.java
@@ -34,90 +51,90 @@ StreamingPlatform/
 │   │   ├── SeriesService.java
 │   │   └── DocumentaryService.java
 │   └── app/
-│       ├── App.java                # Menu interativo
-│       └── DemoApp.java            # Demo automático (apresentação)
+│       ├── App.java                # Interactive menu
+│       └── DemoApp.java            # Automated demo (presentation)
 ├── .gitignore
 └── README.md
 ```
 
 ---
 
-## 🧱 Modelo de Domínio
+## 🧱 Domain Model
 
-### Interfaces por Entidade
+### Interfaces per Entity
 
-| Interface | Movie | Series | Documentary |
-|---|:---:|:---:|:---:|
-| `Classifiable` (ratings) | ✅ | ✅ | ❌ |
-| `Captionable` (legendas) | ✅ | ✅ | ✅ |
-| `Awardable` (prémios) | ❌ | ❌ | ✅ |
+| Interface                 | Movie | Series | Documentary |
+| ------------------------- | :---: | :----: | :---------: |
+| `Classifiable` (ratings)  |  ✅   |   ✅   |     ❌      |
+| `Captionable` (subtitles) |  ✅   |   ✅   |     ✅      |
+| `Awardable` (awards)      |  ❌   |   ❌   |     ✅      |
 
-### Estruturas de Dados por Serviço
+### Data Structures per Service
 
-| Serviço | Coleção Principal | Estrutura Secundária |
-|---|---|---|
-| `MovieService` | `HashMap<String, Movie>` | Binary Search Tree (ano + título) |
-| `SeriesService` | `HashMap<String, Series>` | Stack LIFO personalizada |
-| `DocumentaryService` | `TreeSet<Documentary>` | — |
+| Service              | Main Collection           | Secondary Structure               |
+| -------------------- | ------------------------- | --------------------------------- |
+| `MovieService`       | `HashMap<String, Movie>`  | Binary Search Tree (year + title) |
+| `SeriesService`      | `HashMap<String, Series>` | Custom LIFO Stack                 |
+| `DocumentaryService` | `TreeSet<Documentary>`    | —                                 |
 
 ---
 
 ## 🌳 Binary Search Tree (BST)
 
-A BST armazena `Movie` ordenados **primariamente por `yearRelease`** e **secundariamente por `title`** para evitar conflitos entre filmes do mesmo ano.
+The BST stores `Movie` objects ordered **primarily by `yearRelease`** and **secondarily by `title`** to avoid conflicts between movies released in the same year.
 
-Operações implementadas:
+Implemented operations:
 
-| Operação | Descrição |
-|---|---|
-| `insert` | Insere um filme na posição correta |
-| `inOrder` | Percurso do mais antigo para o mais recente |
-| `preOrder` | Percurso pré-ordem (raiz → esquerda → direita) |
-| `postOrder` | Percurso pós-ordem (esquerda → direita → raiz) |
-| `search` | Pesquisa por ano e título |
-| `remove` | Remove um filme mantendo a estrutura |
-| `minimum` | Filme mais antigo |
-| `maximum` | Filme mais recente |
-| `height` | Altura da árvore |
-| `size` | Número de nós |
-
----
-
-## 📚 Algoritmos de Ordenação
-
-> Implementações próprias — sem uso de `Collections.sort`.
-
-| Algoritmo | Utilização |
-|---|---|
-| **Quick Sort** | Filmes ordenados por duração |
-| **Bubble Sort Otimizado** | Filmes ordenados por título |
-| **Insertion Sort** | Séries ordenadas por título |
-| **Selection Sort** | Documentários ordenados por ano |
+| Operation   | Description                                     |
+| ----------- | ----------------------------------------------- |
+| `insert`    | Inserts a movie in the correct position         |
+| `inOrder`   | Traversal from oldest to newest                 |
+| `preOrder`  | Pre-order traversal (root → left → right)       |
+| `postOrder` | Post-order traversal (left → right → root)      |
+| `search`    | Search by year and title                        |
+| `remove`    | Removes a movie while maintaining the structure |
+| `minimum`   | Oldest movie                                    |
+| `maximum`   | Newest movie                                    |
+| `height`    | Tree height                                     |
+| `size`      | Number of nodes                                 |
 
 ---
 
-## 🔍 Algoritmos de Pesquisa
+## 📚 Sorting Algorithms
 
-| Algoritmo | Utilização |
-|---|---|
-| **Pesquisa Sequencial** | Pesquisa por título em `HashMap` |
-| **Pesquisa via BST** | Pesquisa por ano/título em filmes |
+> Custom implementations — no use of `Collections.sort`.
+
+| Algorithm                 | Usage                        |
+| ------------------------- | ---------------------------- |
+| **Quick Sort**            | Movies sorted by duration    |
+| **Optimized Bubble Sort** | Movies sorted by title       |
+| **Insertion Sort**        | Series sorted by title       |
+| **Selection Sort**        | Documentaries sorted by year |
 
 ---
 
-## ▶️ Como Compilar e Executar
+## 🔍 Searching Algorithms
+
+| Algorithm             | Usage                          |
+| --------------------- | ------------------------------ |
+| **Sequential Search** | Search by title in `HashMap`   |
+| **BST Search**        | Search by year/title in Movies |
+
+---
+
+## ▶️ How to Compile and Run
 
 ### Linux / macOS
 
 ```bash
-# Compilar
+# Compile
 find src -name "*.java" > sources.txt
 javac -d out -sourcepath src @sources.txt
 
-# App interativa (menu completo)
+# Interactive app (full menu)
 java -cp out app.App
 
-# Demo automático (para apresentação, sem input manual)
+# Automated demo (no manual input required)
 java -cp out app.DemoApp
 ```
 
@@ -132,50 +149,53 @@ java -cp out app.App
 
 ---
 
-## 🎭 DemoApp — Casos de Demonstração
+## 🎭 DemoApp — Demo Cases
 
-O `DemoApp` corre automaticamente sem necessidade de input e cobre:
+`DemoApp` runs automatically without any manual input and covers:
 
-**Casos Simples**
-- Criar Movie, Series e Documentary válidos
-- Rejeitar duplicados (mesmo ID ou título)
-- Pesquisar por ID e por título
+**Simple Cases**
 
-**Casos Médios**
-- Listar filmes ordenados por duração
-- Listar séries em produção
-- Listar documentários por restrição de idade
-- Obter as últimas 3 séries criadas (via Stack)
+- Create a valid Movie, Series and Documentary
+- Reject duplicates (same ID or title)
+- Search by ID and by title
 
-**Casos Complexos**
-- Percurso in-order, pre-order e post-order da BST
-- Remover filme da BST e mostrar estrutura resultante
-- Exportar filmes para `.json` e documentários para `.txt`
-- Listar todo o conteúdo ordenado por título
-- Filtrar filmes por intervalo de anos
+**Medium Cases**
 
----
+- List movies ordered by duration
+- List series currently in production
+- List documentaries filtered by age restriction
+- Retrieve the last 3 series created (via Stack)
 
-## 💾 Persistência
+**Complex Cases**
 
-Todas as entidades implementam `Serializable`. Os serviços disponibilizam métodos `saveToFile()` e `loadFromFile()` para persistir e restaurar dados entre execuções usando serialização binária Java.
+- In-order, pre-order and post-order BST traversals
+- Remove a movie from the BST and show the resulting structure
+- Export movies to `.json` and documentaries to `.txt`
+- List all content sorted by title
+- Filter movies by year interval
 
 ---
 
-## 📤 Exportação
+## 💾 Persistence
 
-| Entidade | Formato |
-|---|---|
-| Movies | `.json` e `.txt` |
-| Documentaries | `.json` e `.txt` |
+All entities implement `Serializable`. Each service provides `saveToFile()` and `loadFromFile()` methods to persist and restore data between executions using Java binary serialization.
 
 ---
 
-## 👥 Grupo
+## 📤 Export
+
+| Entity        | Format             |
+| ------------- | ------------------ |
+| Movies        | `.json` and `.txt` |
+| Documentaries | `.json` and `.txt` |
+
+---
+
+## 👥 Group
 
 Luís Afonso, 29731
 
 Pedro Ferreira, 29739
 
-Licenciatura em Engenharia de Computação Gráfica e Multimédia  
-UC Algoritmia e Programação · 2025/2026
+Bachelor's in Computer Graphics and Multimedia Engineering  
+Algorithms and Programming · 2025/2026
