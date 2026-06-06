@@ -276,11 +276,36 @@ public class MovieService {
             bw.write("[\n");
             for (int i = 0; i < movies.size(); i++) {
                 Movie m = movies.get(i);
+
+                // ratings list
+                StringBuilder ratingsJson = new StringBuilder("[");
+                List<Integer> ratings = new ArrayList<>();
+                for (int j = 0; j < m.getNumberOfRatings(); j++)
+                    ratings = m.getRatingsList();
+                for (int j = 0; j < ratings.size(); j++) {
+                    ratingsJson.append(ratings.get(j));
+                    if (j < ratings.size() - 1)
+                        ratingsJson.append(", ");
+                }
+                ratingsJson.append("]");
+
+                // captions list
+                StringBuilder captionsJson = new StringBuilder("[");
+                List<String> captions = m.getCaptions();
+                for (int j = 0; j < captions.size(); j++) {
+                    captionsJson.append("\"").append(captions.get(j)).append("\"");
+                    if (j < captions.size() - 1)
+                        captionsJson.append(", ");
+                }
+                captionsJson.append("]");
+
                 bw.write(String.format(
                         "  {\"id\":\"%s\",\"title\":\"%s\",\"yearRelease\":%d,\"duration\":%d," +
-                                "\"ageRestriction\":\"%s\",\"director\":\"%s\",\"country\":\"%s\",\"budget\":%.2f}",
+                                "\"ageRestriction\":\"%s\",\"director\":\"%s\",\"country\":\"%s\",\"budget\":%.2f," +
+                                "\"averageRating\":%.1f,\"ratings\":%s,\"captions\":%s}",
                         m.getId(), m.getTitle(), m.getYearRelease(), m.getDuration(),
-                        m.getAgeRestriction(), m.getDirector(), m.getCountry(), m.getBudget()));
+                        m.getAgeRestriction(), m.getDirector(), m.getCountry(), m.getBudget(),
+                        m.getAverageRating(), ratingsJson, captionsJson));
                 if (i < movies.size() - 1)
                     bw.write(",");
                 bw.newLine();

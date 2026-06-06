@@ -203,6 +203,15 @@ public class Movie implements Classifiable, Captionable, Serializable {
         return ratings.size();
     }
 
+    /**
+     * Returns the list of all ratings.
+     * 
+     * @return list of ratings
+     */
+    public List<Integer> getRatingsList() {
+        return new ArrayList<>(ratings);
+    }
+
     @Override
     public void addCaption(String caption) {
         if (caption != null && !caption.trim().isEmpty())
