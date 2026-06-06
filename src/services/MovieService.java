@@ -250,21 +250,6 @@ public class MovieService {
     // ==================== Export ====================
 
     /**
-     * Exports all movies to a .txt file ordered by year.
-     * 
-     * @param filePath path to the output file
-     * @throws IOException if an I/O error occurs
-     */
-    public void exportToTxt(String filePath) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            for (Movie m : getAllOrderedByYear()) {
-                bw.write(m.toString());
-                bw.newLine();
-            }
-        }
-    }
-
-    /**
      * Exports all movies to a .json file ordered by year.
      * 
      * @param filePath path to the output file
